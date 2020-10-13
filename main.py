@@ -16,42 +16,35 @@ class Truck:
 
 
 
-def worker():
-    if 1000-fuelTank >= car1.tank:  
-        fuelTank -= car1.tank
+def worker(fuelTank,carList):
+    
+    selectedCar =random.choice(carList) 
+    
+    if fuelTank >= selectedCar.tank :  
+        fuelTank -= selectedCar.tank
+        print(selectedCar)
         
-    if 1000-fuelTank >= car2.tank:  
-        fuelTank -= car2.tank
+    
         
-    if 1000-fuelTank >= car3.tank:  
-        fuelTank -= car3.tank
-        
-    if 1000-fuelTank >= car4.tank:  
-        fuelTank -= car4.tank
-        
-    if 1000-fuelTank >= car5.tank:  
-        fuelTank -= car5.tank
+    return fuelTank
 
 def my_service():
     if 1000-fuelTank <= truck1.tank:  
         fuelTank+=truck1.tank
-        truck1.tank = str(random.randint(500,800))
+        print("truck 1")
     
     if 1000-fuelTank <= truck2.tank:  
         fuelTank+=truck2.tank
-        truck2.tank = str(random.randint(500,800))
+        print("truck 2")
 
     if 1000-fuelTank <= truck3.tank:  
         fuelTank+=truck3.tank
-        truck3.tank = str(random.randint(500,800))
+        print("truck 3")
     
-    # print (threading.currentThread().getName(), 'Exiting')
 
-   # t = threading.Thread(name='my_service', target=my_service)
-   # w = threading.Thread(name='worker', target=worker)
-    #w2 = threading.Thread(target=worker) # use default name
 if(__name__=="__main__"):
-    fuelTank = 1000 ;
+    global fuelTank 
+    fuelTank = 100 
     
     truck1 = Truck(random.randint(500,800))
     truck2= Truck(random.randint(500,800))
@@ -62,6 +55,30 @@ if(__name__=="__main__"):
     car3 = Car(random.randint(50,80))
     car4 = Car(random.randint(50,80))
     car5 = Car(random.randint(50,80))
- 
-
-    print(car5.tank)
+    
+    
+    q = True
+    print("Fuel capacity for car1 "+ str (car1.tank))
+    print("Fuel capacity for car2 "+ str (car2.tank))
+    print("Fuel capacity for car3 "+ str (car3.tank))
+    print("Fuel capacity for car4 "+ str (car4.tank))
+    print("Fuel capacity for car5 "+ str (car5.tank))
+    
+    print("Fuel capacity for truck1 "+ str (truck1.tank))
+    print("Fuel capacity for truck2 "+ str (truck2.tank))
+    print("Fuel capacity for truck3 "+ str (truck3.tank))
+    
+    
+    print("--------------------------------")
+    time.sleep(3)
+    
+    while(q):
+        x = threading.Thread(target = worker, args = (fuelTank,carList,))
+        y = threading.Thread(target = my_service)
+        x.start()
+        #fuelTank = worker(fuelTank)
+        print("------ FUEL TANK------ " + str(fuelTank))
+        time.sleep(2)
+        q = False
+        
+            
