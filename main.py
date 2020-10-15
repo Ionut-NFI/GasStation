@@ -1,7 +1,9 @@
 import random
 import threading
+from threading import Lock
 import time
 import os
+import datetime
 
 exitFlag = 0
 
@@ -18,17 +20,16 @@ class Truck:
         self.name = name
 
 
-
 def worker(carList,fuelTank, scope):
     if(scope == 1):
         while(fuelTank > 0):
+
             time.sleep(1)
             
             selectedCar = random.choice(carList)
             print(fuelTank)
             if fuelTank >= selectedCar.tank :  
                 fuelTank -= selectedCar.tank
-            
                 writeLogFile(fuelTank, str( selectedCar.name), 1)
     else:
         return fuelTank        
@@ -58,7 +59,7 @@ def writeLogFile(fuelTank,car, type):
 
 if(__name__=="__main__"):
     
-    fuelTank = 450 
+    fuelTank = 1000 
    
     truck1 = Truck(random.randint(500,800), "1")
     truck2= Truck(random.randint(500,800), "2")
@@ -97,13 +98,14 @@ if(__name__=="__main__"):
     print("--------------------------------")
     time.sleep(3)
     
-        
+    
     x = threading.Thread(target = worker, args = (carList,fuelTank,1,))
     y = threading.Thread(target = my_service, args = (truckList, fuelTank, 1))
+    
+    
     x.start()
     fuelTank = worker(fuelTank, carList, 0)
+    y.start()
+    fuelTank = my_service(fuelTank, truckList, 0)
 
-    
-    
-        
-            
+    print ("Exiting Main Thread")
