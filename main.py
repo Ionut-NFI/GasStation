@@ -18,19 +18,19 @@ class Truck:
 
 
 
-def worker(fuelTank,carList):
-    
-    while(fuelTank > 0):
-        time.sleep(3)
-        
-        selectedCar = random.choice(carList)
-        
-        if fuelTank >= selectedCar.tank :  
-            fuelTank -= selectedCar.tank
-          
-            #print("\n" + "CAR " + str( selectedCar.name) + "\n"+"Fuel tank " + str(fuelTank) )
-            writeLogFile(fuelTank, str( selectedCar.name))
+def worker(carList,fuelTank, scope):
+    if(scope == 1):
+        while(fuelTank > 0):
+            time.sleep(3)
             
+            selectedCar = random.choice(carList)
+            print(fuelTank)
+            if fuelTank >= selectedCar.tank :  
+                fuelTank -= selectedCar.tank
+            
+                writeLogFile(fuelTank, str( selectedCar.name))
+    else:
+        return fuelTank        
         
 def my_service():
     if 1000-fuelTank <= truck1.tank:  
@@ -57,7 +57,7 @@ def writeLogFile(fuelTank,car):
 
 if(__name__=="__main__"):
     
-    fuelTank = 400 
+    fuelTank = 450 
    
     truck1 = Truck(random.randint(500,800))
     truck2= Truck(random.randint(500,800))
@@ -91,15 +91,15 @@ if(__name__=="__main__"):
     print("--------------------------------")
     time.sleep(3)
     
-    while(fuelTank > 0 ):
         
-        x = threading.Thread(target = worker, args = (fuelTank,carList,))
-        #y = threading.Thread(target = my_service)
-        x.start()
-        fuelTank = worker(fuelTank, carList)
-        print("------ FUEL TANK------ " + str(fuelTank))
-        #time.sleep(2)
-        
-    print("FINISH")
+    x = threading.Thread(target = worker, args = (carList,fuelTank,1,))
+    #y = threading.Thread(target = my_service)
+    x.start()
+    fuelTank = worker(fuelTank, carList, 0)
+
+    if fuelTank == 0:
+        x.kill()    
+        print("FINISH")    
+    
         
             

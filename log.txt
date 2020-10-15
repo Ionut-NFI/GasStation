@@ -1,0 +1,89 @@
+
+CAR 5
+Fuel tank 325
+CAR 1
+Fuel tank 324
+CAR 1
+Fuel tank 323
+CAR 3
+Fuel tank 272
+CAR 1
+Fuel tank 271
+CAR 4
+Fuel tank 199
+CAR 2
+Fuel tank 142
+CAR 5
+Fuel tank 67
+CAR 3
+Fuel tank 16
+CAR 1
+Fuel tank 15
+CAR 1
+Fuel tank 14
+CAR 1
+Fuel tank 13
+CAR 1
+Fuel tank 12
+CAR 1
+Fuel tank 11
+CAR 1
+Fuel tank 10
+CAR 1
+Fuel tank 9
+CAR 1
+Fuel tank 8
+CAR 1
+Fuel tank 7
+CAR 1
+Fuel tank 6
+CAR 1
+Fuel tank 5
+CAR 1
+Fuel tank 4
+CAR 1
+Fuel tank 3
+CAR 1
+Fuel tank 2
+CAR 1
+Fuel tank 1
+CAR 1
+Fuel tank 0
+CAR 5
+Fuel tank 338
+CAR 2
+Fuel tank 263
+CAR 2
+Fuel tank 188
+CAR 5
+Fuel tank 126
+CAR 3
+Fuel tank 59
+CAR 1
+Fuel tank 58
+CAR 1
+Fuel tank 57
+CAR 1
+Fuel tank 56
+CAR 1
+Fuel tank 55
+CAR 1
+Fuel tank 54
+CAR 1
+Fuel tank 53
+CAR 2
+Fuel tank 371
+CAR 5
+Fuel tank 304
+CAR 5
+Fuel tank 237
+CAR 4
+Fuel tank 178
+CAR 2
+Fuel tank 99
+CAR 4
+Fuel tank 40
+CAR 1
+Fuel tank 39
+CAR 1
+Fuel tank 38
