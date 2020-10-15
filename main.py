@@ -13,45 +13,46 @@ class Car:
 
 class Truck:
     
-    def __init__(self, truck):
+    def __init__(self, truck, name):
         self.tank = truck
+        self.name = name
 
 
 
 def worker(carList,fuelTank, scope):
     if(scope == 1):
         while(fuelTank > 0):
-            time.sleep(3)
+            time.sleep(1)
             
             selectedCar = random.choice(carList)
             print(fuelTank)
             if fuelTank >= selectedCar.tank :  
                 fuelTank -= selectedCar.tank
             
-                writeLogFile(fuelTank, str( selectedCar.name))
+                writeLogFile(fuelTank, str( selectedCar.name), 1)
     else:
         return fuelTank        
         
-def my_service():
-    if 1000-fuelTank <= truck1.tank:  
-        fuelTank+=truck1.tank
-        print("truck 1")
-    
-    if 1000-fuelTank <= truck2.tank:  
-        fuelTank+=truck2.tank
-        print("truck 2")
+def my_service(truckList, fuelTank, scope):
+    if(scope == 1):
+        selectedTruck = random.choice(truckList)
+        if 1000-fuelTank <= selectedTruck.tank:  
+            fuelTank+=truck1.tank
+            writeLogFile(fuelTank, str( selectedTruck.name), 0)
+    else:
+        return fuelTank
 
-    if 1000-fuelTank <= truck3.tank:  
-        fuelTank+=truck3.tank
-        print("truck 3")
+def writeLogFile(fuelTank,car, type):
     
-def writeLogFile(fuelTank,car):
     if(not os.path.isfile("log.txt") ):
         f = open("log.txt", "w")
         f.close()
     else:
         f = open("log.txt", "a+")
-        toWrite = "\n" + "CAR " + car + "\n"+"Fuel tank " + str(fuelTank)
+        if type == 1:
+            toWrite = "\n" + "CAR " + car + "\n"+"Fuel tank " + str(fuelTank)
+        else:
+            toWrite = "\n" + "TRUCK " + car + "\n"+"Fuel tank " + str(fuelTank)
         f.write(toWrite)
         f.close()
 
@@ -59,9 +60,9 @@ if(__name__=="__main__"):
     
     fuelTank = 450 
    
-    truck1 = Truck(random.randint(500,800))
-    truck2= Truck(random.randint(500,800))
-    truck3 = Truck(random.randint(500,800))
+    truck1 = Truck(random.randint(500,800), "1")
+    truck2= Truck(random.randint(500,800), "2")
+    truck3 = Truck(random.randint(500,800), "3")
     
     car1 = Car(1, "1")
     car2 = Car(random.randint(50,80), "2")
@@ -76,6 +77,11 @@ if(__name__=="__main__"):
     carList.append(car4)
     carList.append(car5)
     
+    truckList = []
+    truckList.append(truck1)
+    truckList.append(truck2)
+    truckList.append(truck3)
+
     print("Fuel capacity for gas station "+ str(fuelTank))
     print("Fuel capacity for car1 "+ str (car1.tank))
     print("Fuel capacity for car2 "+ str (car2.tank))
@@ -93,13 +99,11 @@ if(__name__=="__main__"):
     
         
     x = threading.Thread(target = worker, args = (carList,fuelTank,1,))
-    #y = threading.Thread(target = my_service)
+    y = threading.Thread(target = my_service, args = (truckList, fuelTank, 1))
     x.start()
     fuelTank = worker(fuelTank, carList, 0)
 
-    if fuelTank == 0:
-        x.kill()    
-        print("FINISH")    
+    
     
         
             
